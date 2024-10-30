@@ -1,2 +1,3 @@
 .markdownlint.yaml
 **/template.md
+.DS_Store
