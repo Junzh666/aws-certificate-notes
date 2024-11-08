@@ -7,10 +7,8 @@ on:
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
-    # 只对特定用户的 PR 执行
     if: github.event.pull_request.user.login == 'chenylon'
     
-    # 添加权限设置
     permissions:
       pull-requests: write
       contents: write
@@ -22,16 +20,10 @@ jobs:
       - name: Auto Merge PR
         run: |
           echo "开始认证 GitHub CLI..."
-          # 设置超时时间
-          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
-          
           echo "开始尝试合并 PR #${{ github.event.pull_request.number }}..."
-          # 添加错误处理
           if ! gh pr merge ${{ github.event.pull_request.number }} --auto --merge; then
             echo "自动合并失败，请检查 PR 状态"
             exit 1
           fi
           
           echo "PR 合并成功！"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
