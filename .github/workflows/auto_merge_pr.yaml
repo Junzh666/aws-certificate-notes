@@ -3,6 +3,9 @@ name: Auto Merge PR
 permissions:
   pull-requests: write
   contents: write
+  checks: write
+  statuses: write
+  issues: write
 
 on:
   pull_request:
@@ -22,7 +25,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "开始尝试合并 PR #${{ github.event.pull_request.number }}..."
-          if ! gh pr merge ${{ github.event.pull_request.number }} --auto --merge; then
+          if ! gh pr merge ${{ github.event.pull_request.number }} --auto --merge --delete-branch; then
             echo "自动合并失败，请检查 PR 状态"
             exit 1
           fi
