@@ -26,6 +26,9 @@ jobs:
       #     PR_URL: ${{ github.event.pull_request.html_url }}
       #   run: gh pr review --approve "$PR_URL"
       
+      # 输出 secrets.GITHUB_TOKEN 的值
+      - name: Output GH_TOKEN
+        run: echo "GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
 
       - name: Auto Merge PR
         env:
