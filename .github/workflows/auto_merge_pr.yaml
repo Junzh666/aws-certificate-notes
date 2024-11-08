@@ -19,14 +19,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      # - name: Approve PR
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     PR_URL: ${{ github.event.pull_request.html_url }}
-      #   run: gh pr review --approve "$PR_URL"
       
-      # 输出 secrets.GITHUB_TOKEN 的值
       - name: Output GH_TOKEN
         run: echo "GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
 
