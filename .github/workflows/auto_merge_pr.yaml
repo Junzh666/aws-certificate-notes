@@ -17,7 +17,7 @@ jobs:
       - name: Auto Merge PR
         run: |
           # 使用 GitHub CLI 进行自动合并
-          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+          gh auth login --with-token <<< "${{ secrets.ACTION_TOKEN }}"
           gh pr merge ${{ github.event.pull_request.number }} --auto --merge
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }} 
