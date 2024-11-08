@@ -18,12 +18,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Auto Merge PR
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          echo "开始认证 GitHub CLI..."
           echo "开始尝试合并 PR #${{ github.event.pull_request.number }}..."
           if ! gh pr merge ${{ github.event.pull_request.number }} --auto --merge; then
             echo "自动合并失败，请检查 PR 状态"
             exit 1
           fi
-          
           echo "PR 合并成功！"
