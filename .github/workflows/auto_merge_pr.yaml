@@ -21,15 +21,9 @@ jobs:
 
       - name: Auto Merge PR
         run: |
-          # 验证 token 是否存在
-          if [ -z "${{ secrets.ACTION_TOKEN }}" ]; then
-            echo "错误：ACTION_TOKEN 未设置"
-            exit 1
-          fi
-          
           echo "开始认证 GitHub CLI..."
           # 设置超时时间
-          timeout 5m gh auth login --with-token <<< "${{ secrets.ACTION_TOKEN }}"
+          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
           
           echo "开始尝试合并 PR #${{ github.event.pull_request.number }}..."
           # 添加错误处理
@@ -40,5 +34,4 @@ jobs:
           
           echo "PR 合并成功！"
         env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          GH_TOKEN: ${{ secrets.ACTION_TOKEN }}  # 添加 GH_TOKEN
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
