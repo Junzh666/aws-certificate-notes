@@ -47,3 +47,4 @@
 感谢您的关注和支持!
 
 test for pr
+test for pr megre automatically
