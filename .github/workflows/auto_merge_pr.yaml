@@ -1,5 +1,9 @@
 name: Auto Merge PR
 
+permissions:
+  pull-requests: write
+  contents: write
+
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -9,17 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.user.login == 'chenylon'
     
-    permissions:
-      pull-requests: write
-      contents: write
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Auto Merge PR
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           echo "开始尝试合并 PR #${{ github.event.pull_request.number }}..."
           if ! gh pr merge ${{ github.event.pull_request.number }} --auto --merge; then
