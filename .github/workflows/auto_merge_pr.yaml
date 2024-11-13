@@ -39,7 +39,7 @@ jobs:
         uses: "pascalgn/automerge-action@v0.16.4"
         env:
           GITHUB_TOKEN: "${{ secrets.PAT }}"
-          MERGE_LABELS: "approved,auto merge,!ready to review"
+          MERGE_LABELS: "automerge"
           MERGE_METHOD: "squash"
           MERGE_COMMIT_MESSAGE: "automatic"
           MERGE_FORKS: "true"
