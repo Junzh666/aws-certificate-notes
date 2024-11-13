@@ -35,10 +35,26 @@ jobs:
         uses: actions/checkout@v4
       
 
+      - name: Add automerge label
+        if: github.event.pull_request.user.login == 'chenylon'
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+          PR_URL: ${{ github.event.pull_request.number }}
+        run: |
+          gh pr edit $PR_URL --add-label "automerge"
+
+      - name: Auto approve PR
+        if: github.event.pull_request.user.login == 'chenylon'
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+          PR_URL: ${{ github.event.pull_request.number }}
+        run: |
+          gh pr review $PR_URL --approve
+
       - name: automerge
         uses: "pascalgn/automerge-action@v0.16.4"
         env:
-          GITHUB_TOKEN: "${{ secrets.PAT }}"
+          GITHUB_TOKEN: ${{ secrets.PAT }}
           MERGE_LABELS: "automerge"
           MERGE_METHOD: "squash"
           MERGE_COMMIT_MESSAGE: "automatic"
