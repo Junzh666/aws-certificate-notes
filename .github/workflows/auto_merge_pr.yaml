@@ -31,20 +31,23 @@ jobs:
     if: github.event.pull_request.user.login == 'chenylon'
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      
-      - name: automerge
+      - id: automerge
+        name: automerge
         uses: "pascalgn/automerge-action@v0.16.4"
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-          MERGE_METHOD: "squash"
-          MERGE_COMMIT_MESSAGE: "automatic"
-          MERGE_FORKS: "true"
-          MERGE_RETRIES: "50"
-          MERGE_RETRY_SLEEP: "10000"
-          MERGE_REQUIRED_APPROVALS: "1"
-          UPDATE_METHOD: "rebase"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      
+      # - name: automerge
+      #   uses: "pascalgn/automerge-action@v0.16.4"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.PAT }}
+      #     MERGE_METHOD: "squash"
+      #     MERGE_COMMIT_MESSAGE: "automatic"
+      #     MERGE_FORKS: "true"
+      #     MERGE_RETRIES: "50"
+      #     MERGE_RETRY_SLEEP: "10000"
+      #     MERGE_REQUIRED_APPROVALS: "1"
+      #     UPDATE_METHOD: "rebase"
 
       # - name: Auto approve PR
       #   env:
