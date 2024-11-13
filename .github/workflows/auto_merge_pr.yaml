@@ -24,7 +24,7 @@ jobs:
       
       - name: Output GH_TOKEN
         run: |
-          echo "GH_TOKEN: ${{ secrets.ADMIN_TOKEN }}"
+          echo "GH_TOKEN: ${{ secrets.PAT }}"
 
       # - name: Auto approve PR
       #   env:
@@ -34,7 +34,7 @@ jobs:
 
       - name: Auto Merge PR
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.PAT }}"
           PR_URL: ${{ github.event.pull_request.number }}
         run: |
           gh pr merge "$PR_URL" --auto --merge 
