@@ -24,9 +24,9 @@ jobs:
         run: |
           echo "GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
 
-      # - name: Auto Merge PR
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     PR_URL: ${{ github.event.pull_request.html_url }}
-      #   run: |
-      #     gh pr merge "$PR_URL" --auto --merge 
+      - name: Auto Merge PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr merge "$PR_URL" --auto --merge 
