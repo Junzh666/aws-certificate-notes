@@ -34,7 +34,7 @@ jobs:
 
       - name: Auto Merge PR
         env:
-          GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+          GH_TOKEN: ${{ secrets.ADMIN_TOKEN }}
           PR_URL: ${{ github.event.pull_request.number }}
         run: |
           gh pr merge "$PR_URL" --auto --merge 
