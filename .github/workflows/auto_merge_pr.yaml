@@ -1,11 +1,11 @@
 name: automerge
 
-# permissions:
-#   pull-requests: write
-#   contents: write
-#   checks: write
-#   statuses: write
-#   issues: write
+permissions:
+  pull-requests: write
+  contents: write
+  checks: write
+  statuses: write
+  issues: write
 
 on:
   pull_request:
