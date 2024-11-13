@@ -19,24 +19,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
       
       - name: Output GH_TOKEN
         run: |
           echo "GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Auto approve PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
-        run: |
-          gh pr review "$PR_URL" --approve
+      # - name: Auto approve PR
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     gh pr review "$PR_URL" --approve
 
-      - name: Auto Merge PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
-        run: |
-          gh pr merge "$PR_URL" --auto --merge 
+      # - name: Auto Merge PR
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     PR_URL: ${{ github.event.pull_request.html_url }}
+      #   run: |
+      #     gh pr merge "$PR_URL" --auto --merge 
