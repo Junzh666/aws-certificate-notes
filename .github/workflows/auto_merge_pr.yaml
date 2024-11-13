@@ -20,11 +20,21 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       
-      - name: Output GH_TOKEN
-        run: |
-          echo "GH_TOKEN: ${{ secrets.PAT }}"
+
+      - name: automerge
+        uses: "pascalgn/automerge-action@v0.16.4"
+        env:
+          GITHUB_TOKEN: "${{ secrets.PAT }}"
+          MERGE_LABELS: "approved,auto merge,!ready to review"
+          MERGE_METHOD: "squash"
+          MERGE_COMMIT_MESSAGE: "automatic"
+          MERGE_FORKS: "true"
+          MERGE_RETRIES: "50"
+          MERGE_RETRY_SLEEP: "10000"
+          MERGE_REQUIRED_APPROVALS: "1"
+          UPDATE_METHOD: "rebase"
 
       # - name: Auto approve PR
       #   env:
@@ -32,9 +42,9 @@ jobs:
       #   run: |
       #     gh pr review "$PR_URL" --approve
 
-      - name: Auto Merge PR
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-          PR_URL: ${{ github.event.pull_request.number }}
-        run: |
-          gh pr merge "$PR_URL" --auto --merge 
+      # - name: Auto Merge PR
+      #   env:
+      #     GH_TOKEN: ${{ secrets.PAT }}
+      #     PR_URL: ${{ github.event.pull_request.number }}
+      #   run: |
+      #     gh pr merge "$PR_URL" --auto --merge 
